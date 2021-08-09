@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html manifest="index.manifest">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="target-densitydpi=device-dpi,initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+<meta name="viewport" content="width=device-width,height=device-height">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="apple-touch-icon" href="img/control/icon.png">
+<!--<link rel="apple-touch-startup-image" href="../vr_files/styling/splash-ipad.png" />-->
+<style>
+html {
+	height:100%;
+}
+body {
+	height:100%;
+	padding:0;
+	margin:0;
+	overflow:hidden
+}
+
+.button {
+    color: #666;
+    background-color: #EEE;
+    border-color: #EEE;
+    font-size: 16px;
+    font-family: "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    text-decoration: none;
+    text-align: center;
+    line-height: 40px;
+    height: 40px;
+	padding: 1px 5px;
+    margin: 1px;
+    display: inline-block;
+    appearance: none;
+    cursor: pointer;
+    border: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition-property: all;
+    transition-property: all;
+    -webkit-transition-duration: .3s;
+    transition-duration: .3s;
+    border-radius: 4px;
+    font-size: 9.6px;
+    height: 24px;
+    line-height: 24px;
+}
+.button-primary {
+    background-color: #1B9AF7;
+    border-color: #1B9AF7;
+    color: #FFF;
+    }
+</style>
+
+<title></title>
+</head>
+
+<body>  
+
+	<div id="title" style="float:left;z-index:9999999;position:relative;">
+		<a id="zw" href="index.html?roomName=zw" class="button">主卧</a>
+		<a id="cw" href="index.html?roomName=cw" class="button">次卧</a>
+		<a id="wsj2" href="index.html?roomName=wsj2" class="button">卫生间2</a>
+		<a id="lt" href="index.html?roomName=lt" class="button">楼梯</a>
+		<a id="kt" href="index.html?roomName=kt" class="button">客厅</a>
+		<a id="cf" href="index.html?roomName=cf" class="button">厨房</a>
+		<a id="wsj" href="index.html?roomName=wsj" class="button">卫生间</a>
+	</div>
+<div id="myPano" style="width:100%;height:100%;">
+    
+	<div id="nonhtml5" style="display:none;">
+		
+	</div>
+	
+	<noscript><table width="100%" height="100%"><tr valign="middle"><td><center>错误:<br/><br/>Javascript没有激活。<br/><br/></center></td></tr></table></noscript>
+</div>
+
+<script src="rmpano.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+    function getQueryVariable(variable)
+    {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i=0;i<vars.length;i++) {
+                var pair = vars[i].split("=");
+                if(pair[0] == variable){return pair[1];}
+        }
+        return(false);
+    }
+
+    var roomName = getQueryVariable('roomName');
+    if (isHTML5possible()) {
+        if (roomName) {
+            creatViewer("myPano", "img/" + roomName + ".js", "100%", "100%");
+            document.getElementById(roomName).classList.add("button-primary");
+        } else {
+            creatViewer("myPano", "img/zw.js", "100%", "100%");
+            document.getElementById("zw").classList.add("button-primary");
+        }
+    } else {
+        document.getElementById("nonhtml5").style.display = "inline";
+    }
+
+
+    window.onload = function() {
+        document.getElementById("copyRight").style.display = "none";
+        var aa = document.getElementById("copyRight");
+        aa.innerHTML = "";
+    }
+</script>
+
+</body>
+</html>
